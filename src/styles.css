@@ -1,0 +1,1440 @@
+:root {
+  --bg: #ffffff;
+  --ink: #14151a;
+  --muted: #8a8f98;
+  --line: #ececef;
+  --accent: #111317;
+  --accent-soft: #f4f4f6;
+  --radius: 16px;
+  --maxw: 460px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container central que NUNCA estoura a largura no celular. */
+.screen {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 28px 20px 48px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* ---------- Tipografia ---------- */
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0 0 12px;
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  appearance: none;
+  border: none;
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.06s ease, opacity 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.985);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 4px;
+}
+
+/* ---------- Seleção de times ---------- */
+.picker-group {
+  margin-bottom: 26px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.team-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  min-width: 0;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.team-chip .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.team-chip.selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.team-chip:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.team-flag {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ---------- Confronto (topo do bolão) ---------- */
+.matchup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 34px 8px 30px;
+}
+
+.matchup .side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.matchup .flag {
+  font-size: 44px;
+  line-height: 1;
+}
+
+.matchup .team-name {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
+.matchup .vs {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 6px 0 22px;
+}
+
+/* ---------- Lista de palpites ---------- */
+.prediction-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.prediction-row .who {
+  font-weight: 600;
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prediction-row .score {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.prediction-row .left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.add-row {
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: 1.5px dashed var(--line);
+  border-radius: 14px;
+  padding: 15px;
+  margin-top: 16px;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 22px 0;
+}
+
+/* ---------- Formulário de palpite ---------- */
+.form-card {
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-top: 16px;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 7px;
+}
+
+.input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  font-size: 16px;
+  color: var(--ink);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+.score-fields {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 12px;
+}
+
+.score-fields .x {
+  padding-bottom: 14px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.score-input {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.form-actions .btn {
+  width: auto;
+  flex: 1;
+}
+
+/* topo com botão voltar */
+.topbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+/* ============================================================
+   Parte 2 — Seleção do confronto (slots + busca + cards)
+   ============================================================ */
+
+/* ---------- Slots Time A / Time B ---------- */
+.slots {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin: 22px 0 6px;
+}
+
+.slots__x {
+  align-self: center;
+  font-weight: 700;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.slot {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.slot.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.slot__label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.slot__team {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.slot__flag {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.slot__name {
+  font-size: 15px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.slot__placeholder {
+  font-size: 15px;
+  color: var(--muted);
+}
+
+/* ---------- Aviso ---------- */
+.warning {
+  margin: 10px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #c0392b;
+}
+
+/* ---------- Busca + filtro ---------- */
+.search-list {
+  margin-top: 18px;
+}
+
+.search-input {
+  margin-bottom: 12px;
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+  background: var(--accent-soft);
+  padding: 4px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.segmented__item {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 9px 8px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+.segmented__item.active {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Lista de cards ---------- */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.team-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.team-card.selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.team-card:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.team-card__icon {
+  font-size: 30px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.team-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.team-card__name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.team-card__category {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.team-card__check {
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ---------- Preview do confronto ---------- */
+.match-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 8px 4px 4px;
+}
+
+.match-preview__side {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.match-preview__flag {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.match-preview__name {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.match-preview__vs {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ============================================================
+   Parte 3 — Palpites
+   ============================================================ */
+
+.prediction-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estado vazio elegante */
+.empty-state {
+  text-align: center;
+  padding: 34px 16px 30px;
+}
+
+.empty-state__icon {
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+.empty-state__title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.empty-state__subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Times ao lado dos campos de placar no formulário */
+.score-team {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.score-team__flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ============================================================
+   Parte 4 — Edição, selo "editado" e encerrar bolão
+   ============================================================ */
+
+.who-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.edited-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--accent-soft);
+  padding: 2px 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+/* Botão discreto — não compete com "+ adicionar palpite" */
+.end-bolao {
+  align-self: center;
+  margin-top: 22px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.end-bolao:active {
+  opacity: 0.6;
+}
+
+/* ============================================================
+   Parte 5 — Resultado, ranking, copiar resumo
+   ============================================================ */
+
+/* ---------- Resultado do jogo ---------- */
+.result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.result-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.result-card__empty {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.result-card__score {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.result-card__score strong {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Pontos no palpite ---------- */
+.prediction-row__pts {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- Ranking ---------- */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.ranking-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ranking-row__pos {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--muted);
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.ranking-row__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.ranking-row__name {
+  font-size: 16px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ranking-row__palpite {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.ranking-row__pts {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Resumo copiado ---------- */
+.copied-msg {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 8px 0 0;
+}
+
+/* ============================================================
+   Etapa Copa 2026 — bandeiras reais, cards de seleção, status
+   ============================================================ */
+
+/* ---------- Bandeira como imagem ---------- */
+.team-img {
+  height: 1em;
+  width: auto;
+  max-width: 1.6em;
+  border-radius: 0.18em;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  background: #f4f4f6;
+}
+
+.team-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--ink);
+  font-size: 0.42em;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+/* segmented com 4 itens — aperta um pouco a fonte/padding */
+.segmented__item {
+  padding: 9px 4px;
+  font-size: 13px;
+}
+
+/* ---------- FIFA code no card ---------- */
+.team-card__fifa {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Cards do ranking com status ---------- */
+.rank-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  margin-bottom: 10px;
+}
+
+/* cores suaves por status */
+.rank-card--exact {
+  border-color: #bfe6c9;
+  background: #f3fbf5;
+}
+.rank-card--partial {
+  border-color: #f1e2ad;
+  background: #fdfaf0;
+}
+.rank-card--eliminated {
+  border-color: #efc7c7;
+  background: #fdf4f4;
+}
+
+.rank-card__pos {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--muted);
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  padding-top: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rank-card__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rank-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rank-card__name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-card__pts {
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.rank-card__palpite {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.rank-card__statusline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.rank-card__reason {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Badge de status ---------- */
+.status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.status-badge--exact {
+  background: #d8f1de;
+  color: #1f7a39;
+}
+.status-badge--partial {
+  background: #f7ecc4;
+  color: #8a6d1a;
+}
+.status-badge--eliminated {
+  background: #f7d6d6;
+  color: #a23a3a;
+}
+
+.rank-card--exact .rank-card__pts {
+  color: #1f7a39;
+}
+.rank-card--partial .rank-card__pts {
+  color: #8a6d1a;
+}
+.rank-card--eliminated .rank-card__pts {
+  color: #a23a3a;
+}
+
+/* ============================================================
+   Etapa Goleadores — card guiado, steppers e dropdowns
+   ============================================================ */
+
+/* ---------- Card "Faça seu palpite" ---------- */
+.guess-card {
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.05);
+}
+
+.guess-card__title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+}
+
+.guess-card__subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 18px;
+  line-height: 1.45;
+}
+
+/* ---------- Steppers de placar ---------- */
+.steppers {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin: 4px 0 6px;
+}
+
+/* X grande e óbvio, alinhado verticalmente com os placares */
+.steppers__x {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+  padding-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.stepper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.stepper__team {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.stepper__flag {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.stepper__name {
+  font-size: 14px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stepper__controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  justify-content: center;
+}
+
+.stepper__btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--accent-soft);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.stepper__btn:active {
+  transform: scale(0.94);
+}
+
+.stepper__value {
+  min-width: 40px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Área de goleadores ---------- */
+.scorers-area {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.scorer-block__title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.scorer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scorer-block__empty {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- Dropdown de goleador ---------- */
+.scorer-select {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scorer-select__label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.scorer-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: left;
+  color: var(--muted);
+}
+
+.scorer-select__trigger.has-player {
+  color: var(--ink);
+  font-weight: 600;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.scorer-select__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scorer-select__caret {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.scorer-select__panel {
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 6px;
+  max-height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #fff;
+}
+
+.scorer-select__search {
+  margin-bottom: 6px;
+}
+
+.scorer-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 10px;
+  border: none;
+  background: none;
+  border-radius: 9px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.scorer-option:active {
+  background: var(--accent-soft);
+}
+
+.scorer-option__name {
+  font-size: 15px;
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scorer-option__meta {
+  font-size: 12px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.scorer-option__divider {
+  height: 1px;
+  background: var(--line);
+  margin: 4px 6px;
+}
+
+.scorer-option__empty {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 8px 10px;
+  margin: 0;
+}
+
+/* avatar do jogador */
+.player-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--accent-soft);
+}
+
+.player-avatar--initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* CTA principal maior */
+.btn-cta {
+  padding: 17px 18px;
+  font-size: 17px;
+}
+
+/* ---------- Lista "Palpites travados" ---------- */
+.guess-row {
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.guess-row__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.guess-row__main {
+  font-size: 15px;
+  min-width: 0;
+}
+
+.guess-row__main strong {
+  font-weight: 700;
+}
+
+.guess-row__scorers {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+  padding-left: 2px;
+}
+
+.guess-row__scorers-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.guess-row__scorer-line {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.rank-card__scorers {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Toggle de goleadores ---------- */
+.scorer-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 14px;
+  margin-bottom: 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--accent-soft);
+}
+
+.scorer-toggle__text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.switch {
+  position: relative;
+  width: 46px;
+  height: 28px;
+  border-radius: 999px;
+  border: none;
+  background: #d3d5da;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+  padding: 0;
+}
+
+.switch.on {
+  background: var(--accent);
+}
+
+.switch__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
+}
+
+.switch.on .switch__knob {
+  transform: translateX(18px);
+}
+
+/* ---------- Selo de origem do elenco ---------- */
+.scorer-block__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.scorer-block__title {
+  margin: 0;
+}
+
+.squad-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.squad-badge--official {
+  background: #d8f1de;
+  color: #1f7a39;
+}
+
+.squad-badge--test {
+  background: var(--accent-soft);
+  color: var(--muted);
+}
+
+.scorer-block__notice {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+/* ---------- Selo honesto de status do elenco ---------- */
+.squad-status {
+  font-size: 11px;
+  font-weight: 600;
+  margin: -4px 0 10px;
+  letter-spacing: 0.01em;
+}
+
+.squad-status--official {
+  color: #1f7a39;
+}
+.squad-status--pending_verification {
+  color: #8a6d1a;
+}
+.squad-status--mock,
+.squad-status--missing {
+  color: var(--muted);
+}
+
+/* ---------- Ranking: quebra placar/goleadores ---------- */
+.rank-card__breakdown {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.rank-card__matched {
+  font-size: 13px;
+  color: var(--ink);
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   Ajustes de UI — rodapé fixo da seleção + mais respiro
+   ============================================================ */
+
+/* Rodapé fixo com o CTA sempre visível na tela de seleção */
+.select-footer {
+  position: sticky;
+  bottom: 0;
+  margin: 18px -20px 0;
+  padding: 14px 20px calc(env(safe-area-inset-bottom, 0px) + 16px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--line);
+}
+
+.select-footer__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.select-footer__side {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.select-footer__flag {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.select-footer__x {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+/* Tela de seleção não precisa de padding-bottom grande (footer cuida disso) */
+.select-footer ~ * {
+  /* nada após o footer */
+}
+
+/* ----- Mais espaçamento onde estava apertado ----- */
+.field {
+  margin-bottom: 16px;
+}
+
+.guess-card {
+  padding: 22px;
+}
+
+.section-label {
+  margin-bottom: 14px;
+}
+
+.scorers-area {
+  gap: 20px;
+  margin-top: 20px;
+  padding-top: 18px;
+}
+
+.scorer-block {
+  gap: 12px;
+}
+
+.rank-card {
+  padding: 15px 16px;
+  margin-bottom: 12px;
+}
+
+.rank-card__body {
+  gap: 5px;
+}
+
+/* respiro entre as seções de slots e a busca */
+.slots {
+  margin: 24px 0 10px;
+}
+
+.search-list {
+  margin-top: 20px;
+}
+
+/* steppers um pouco mais espaçados */
+.steppers {
+  margin: 8px 0 8px;
+}
