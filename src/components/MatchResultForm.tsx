@@ -17,6 +17,9 @@ interface Props {
   initialResult?: MatchResult;
   onSubmit: (data: MatchResultFormData) => void;
   onCancel: () => void;
+  onLiveChange?: (data: MatchResultFormData | null) => void;
+  submitLabel?: string;
+  title?: string;
 }
 
 function sanitizeScore(value: string | number): string {
@@ -28,7 +31,15 @@ function initialSlots(team: string, count: number, existing?: ActualScorer[]): A
   return Array.from({ length: count }, (_, i) => makeEmptyScorer(team, i + 1));
 }
 
-export function MatchResultForm({ match, initialResult, onSubmit, onCancel }: Props) {
+export function MatchResultForm({
+  match,
+  initialResult,
+  onSubmit,
+  onCancel,
+  onLiveChange,
+  submitLabel = "Salvar resultado",
+  title,
+}: Props) {
   const isEdit = Boolean(initialResult);
   const { homeTeam, awayTeam } = match;
 
@@ -57,6 +68,20 @@ export function MatchResultForm({ match, initialResult, onSubmit, onCancel }: Pr
 
   const homeStatus = playerService.getSquadMeta(homeTeam.id).status;
   const awayStatus = playerService.getSquadMeta(awayTeam.id).status;
+
+  useEffect(() => {
+    if (!onLiveChange) return;
+    if (homeScore === "" || awayScore === "") {
+      onLiveChange(null);
+      return;
+    }
+    onLiveChange({
+      homeScore: Number(homeScore),
+      awayScore: Number(awayScore),
+      homeScorers,
+      awayScorers,
+    });
+  }, [awayScore, awayScorers, homeScore, homeScorers, onLiveChange]);
 
   // Slots de goleadores reais acompanham o placar informado.
   function changeHomeScore(v: string) {
@@ -91,7 +116,7 @@ export function MatchResultForm({ match, initialResult, onSubmit, onCancel }: Pr
   return (
     <div className="form-card">
       <p className="section-label">
-        {isEdit ? "Editar resultado" : "Informar resultado"}
+        {title ?? (isEdit ? "Editar resultado" : "Informar resultado")}
       </p>
 
       <div className="score-fields">
@@ -158,7 +183,7 @@ export function MatchResultForm({ match, initialResult, onSubmit, onCancel }: Pr
           Cancelar
         </button>
         <button className="btn btn-primary" onClick={handleSubmit}>
-          Salvar resultado
+          {submitLabel}
         </button>
       </div>
     </div>

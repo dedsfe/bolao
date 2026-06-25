@@ -43,7 +43,7 @@ export function RankingList({ match, result }: Props) {
               <span className={`status-badge status-badge--${r.status}`}>
                 {statusLabel(r.status)}
               </span>
-              <span className="rank-card__reason">{r.reason}</span>
+              <span className="rank-card__reason">{r.reasons.join(" · ")}</span>
             </div>
 
             {r.matchedScorers.length > 0 && (
