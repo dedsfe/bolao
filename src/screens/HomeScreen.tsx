@@ -33,7 +33,7 @@ export function HomeScreen({ onStart }: Props) {
 
       <div className="home-screen__footer">
         <button className="home-screen__btn" onClick={onStart}>
-          Começar Bolão 🚀
+          Começar Bolão
         </button>
       </div>
     </div>
