@@ -88,6 +88,7 @@ function normalize(value: string): string {
 function teamAliases(name: string): string[] {
   const normalized = normalize(name);
   if (normalized === "brasil") return ["brasil", "brazil"];
+  if (normalized === "japao") return ["japao", "japan"];
   if (normalized === "escocia") return ["escocia", "scotland"];
   return [normalized];
 }

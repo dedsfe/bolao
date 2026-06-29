@@ -82,6 +82,7 @@ function normalize(value: string): string {
 function aliases(name: string): string[] {
   const normalized = normalize(name);
   if (normalized === "brasil") return ["brasil", "brazil", "bra"];
+  if (normalized === "japao") return ["japao", "japan", "jpn"];
   if (normalized === "escocia") return ["escocia", "scotland", "sco"];
   return [normalized];
 }
